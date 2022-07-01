@@ -1,9 +1,9 @@
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT,
-    email VARCHAR(255),
-    firstName VARCHAR(255),
-    lastName VARCHAR(255),
-    createdAt TIME,
-    lastLogin TIME,
+    email VARCHAR(255) NOT NULL,
+    firstName VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255) NOT NULL,
+    createdAt DATETIME NOT NULL,
+    lastLogin DATETIME NOT NULL,
     PRIMARY KEY (id)
-)
+);
