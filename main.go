@@ -34,10 +34,17 @@ var db *sql.DB
 var timeFormat = "2006-01-02 15:04:05.000000"
 
 func init() {
+	var u = user{
+		email:     "brandon@byitkc.com",
+		firstName: "Brandon",
+		lastName:  "Young",
+		createdAt: time.Now(),
+		lastLogin: time.Now(),
+	}
 	defer dropTable()
 	validateConnection()
 	initializeDatabase()
-	storeUser()
+	storeUser(u)
 	user := retrieveUser("brandon@byitkc.com")
 	fmt.Printf("%+v", user)
 
@@ -78,15 +85,15 @@ func initializeDatabase() {
 	log.Printf("Successfully Initialized Database")
 }
 
-func storeUser() {
+func storeUser(u user) {
 	log.Println("Inserting test user")
 	stmt := fmt.Sprintf(`
 	INSERT INTO users(email, firstName, lastName, createdAt, lastLogin)
-	VALUES ('%v', '%v', '%v', '%v', '%v')
-	`, "brandon@byitkc.com", "Brandon", "Young", encodeTime(time.Now()), encodeTime(time.Now()))
-
+	VALUES ('%v', '%v', '%v', '%v', '%v');
+	`, u.email, u.firstName, u.lastName, encodeTime(u.createdAt), encodeTime(u.lastLogin))
 	log.Println(stmt)
-	_, err := db.Exec(stmt)
+
+	_, err = db.Exec(stmt)
 	if err != nil {
 		panic(err)
 	}
