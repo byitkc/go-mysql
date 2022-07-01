@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  mariadb:
+    image: mariadb:latest
+    volumes:
+      - /Users/brandonyoung/containers/go-mysql/mariadb/database:/var/lib/mysql
+      - /Users/brandonyoung/containers/go-mysql/mariadb/conf.d:/etc/mysql/conf.d
+    ports:
+      - 3306:3306
+    environment:
+      MARIADB_ROOT_PASSWORD: password
